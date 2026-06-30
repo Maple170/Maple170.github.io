@@ -1,6 +1,6 @@
 # Portfolio
 
-菱山 大悟のインターンシップ用ポートフォリオサイトです。
+九州大学工学部量子物理工学科4年のポートフォリオサイトです。資格・経歴・制作物をまとめており、研究内容やスキルセットを紹介しています。
 
 🔗 https://maple170.github.io
 
@@ -10,16 +10,3 @@
 - Vite
 - Tailwind CSS
 - shadcn/ui
-
-## ローカル開発
-
-```bash
-pnpm install
-pnpm dev
-```
-
-http://localhost:5173 で確認できます。
-
-## デプロイ
-
-`master` ブランチへのプッシュで GitHub Actions が自動的にビルド・デプロイします。
