@@ -21,7 +21,7 @@ const certifications = [
 
 const experiences = [
   {
-    role: "量子物理工学科 在学",
+    role: "九州大学工学部 在学",
     company: "九州大学工学部量子物理工学科",
     period: "2023年4月 — 現在",
     duration: "継続中",
