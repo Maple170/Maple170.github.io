@@ -11,7 +11,7 @@ const profile = {
   email: "makaroni4679@gmail.com",
   github: "github.com/Maple170",
   githubUrl: "https://github.com/Maple170",
-  bio: "九州大学工学部量子物理工学科4年。多田研究室にて量子アニーリングを用いた最適化問題の研究に取り組んでいます。Python・PyTorchを用いたシミュレーション・機械学習を得意とし、物理と情報の融合領域でエンジニアとして貢献できる環境を求めています。",
+  bio: "九州大学工学部量子物理工学科4年。多田研究室にて量子アニーリングを用いた最適化問題の研究に取り組んでいます。Python・PyTorchを用いたシミュレーション・機械学習を扱い、物理と情報の融合領域でエンジニアとして貢献できる環境を求めています。",
 };
 
 const certifications = [
