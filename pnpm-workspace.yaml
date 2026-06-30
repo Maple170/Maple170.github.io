@@ -1,0 +1,12 @@
+packages:
+  - '.'
+supportedArchitectures:
+  os:
+    - current
+  cpu:
+    - current
+# Refuse packages published < 7 days ago, matching the root pnpm-workspace.yaml.
+minimumReleaseAge: 10080
+allowBuilds:
+  '@tailwindcss/oxide': true
+  esbuild: true
