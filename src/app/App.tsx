@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { Github, Mail, MapPin, Calendar, Award, Briefcase, Menu, X } from "lucide-react";
+import { Github, Mail, MapPin, Calendar, Award, Briefcase, Menu, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 import profilePhoto from "@/imports/84DEA58E-DD5C-49FA-BA3A-5092FA009641_1_105_c.jpeg";
-import portfolioScreenshot from "@/imports/screenshot_2.png";
+import screenshot1 from "@/imports/screenshot_1.png";
+import screenshot2 from "@/imports/screenshot_2.png";
+import screenshot3 from "@/imports/screenshot_3.png";
 
 const profile = {
   name: "菱山 大悟",
@@ -39,14 +41,14 @@ const experiences = [
   },
 ];
 
-const projects: { title: string; description: string; tech: string[]; github: string; demo: string | null; image: string | null }[] = [
+const projects: { title: string; description: string; tech: string[]; github: string; demo: string | null; images: string[] }[] = [
   {
     title: "ポートフォリオ最適化：古典 vs 量子",
     description: "幾何ブラウン運動で生成したダミー株価データを用い、古典ソルバー (scipy) と量子アニーリング (Fixstars Amplify) でポートフォリオ最適化を行い結果を比較。研究室での量子アニーリング研究を応用したデモアプリ。",
     tech: ["Python", "Amplify", "scipy", "Streamlit"],
     github: "https://github.com/Maple170/portfolio-optimization",
     demo: null,
-    image: portfolioScreenshot,
+    images: [screenshot1, screenshot2, screenshot3],
   },
 ];
 
@@ -54,6 +56,7 @@ const skills = ["Python", "PyTorch", "Git"];
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [lightbox, setLightbox] = useState<{ images: string[]; index: number } | null>(null);
 
   const navLinks = [
     { id: "about", label: "About" },
@@ -357,20 +360,36 @@ export default function App() {
                     )}
                   </div>
                 </div>
-                {project.image && (
-                  <div className="w-full md:w-96 shrink-0 rounded-xl overflow-hidden border border-border">
+                {project.images.length > 0 && (
+                  <button
+                    onClick={() => setLightbox({ images: project.images, index: 0 })}
+                    className="w-full md:w-96 shrink-0 rounded-xl overflow-hidden border border-border cursor-zoom-in group relative"
+                  >
                     <ImageWithFallback
-                      src={project.image}
+                      src={project.images[0]}
                       alt={project.title}
-                      className="w-full object-cover"
+                      className="w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                     />
-                  </div>
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                      <span className="opacity-0 group-hover:opacity-100 transition-opacity text-white text-xs bg-black/50 px-3 py-1 rounded-full">
+                        スクリーンショットを見る ({project.images.length}枚)
+                      </span>
+                    </div>
+                  </button>
                 )}
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      {lightbox && (
+        <Lightbox
+          images={lightbox.images}
+          startIndex={lightbox.index}
+          onClose={() => setLightbox(null)}
+        />
+      )}
 
       {/* Footer */}
       <footer className="border-t border-border py-10">
@@ -387,6 +406,53 @@ export default function App() {
           </a>
         </div>
       </footer>
+    </div>
+  );
+}
+
+function Lightbox({ images, startIndex, onClose }: { images: string[]; startIndex: number; onClose: () => void }) {
+  const [idx, setIdx] = useState(startIndex);
+  const prev = () => setIdx((i) => (i - 1 + images.length) % images.length);
+  const next = () => setIdx((i) => (i + 1) % images.length);
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <div className="relative max-w-4xl w-full mx-4" onClick={(e) => e.stopPropagation()}>
+        <button
+          onClick={onClose}
+          className="absolute -top-10 right-0 text-white/70 hover:text-white transition-colors"
+        >
+          <X size={24} />
+        </button>
+        <img src={images[idx]} alt="" className="w-full rounded-xl shadow-2xl" />
+        {images.length > 1 && (
+          <>
+            <button
+              onClick={prev}
+              className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/70 transition-colors"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <button
+              onClick={next}
+              className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/70 transition-colors"
+            >
+              <ChevronRight size={20} />
+            </button>
+            <div className="flex justify-center gap-2 mt-4">
+              {images.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setIdx(i)}
+                  className={`w-2 h-2 rounded-full transition-colors ${i === idx ? "bg-white" : "bg-white/40"}`}
+                />
+              ))}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }
