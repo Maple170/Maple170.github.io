@@ -320,32 +320,11 @@ export default function App() {
           </h2>
           <div className="space-y-0 divide-y divide-border">
             {projects.map((project) => (
-              <div key={project.title} className="py-10 flex flex-col md:flex-row md:items-start gap-8">
+              <div key={project.title} className="py-10 flex flex-col md:flex-row md:items-center gap-10">
                 <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-3">
-                    <h3 className="text-xl font-medium text-foreground">{project.title}</h3>
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      <Github size={13} />
-                      GitHub
-                    </a>
-                    {project.demo && (
-                      <a
-                        href={project.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        Demo
-                      </a>
-                    )}
-                  </div>
+                  <h3 className="text-xl font-medium text-foreground mb-3">{project.title}</h3>
                   <p className="text-[14px] leading-[1.85] text-foreground/75 max-w-[60ch] mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mb-5">
                     {project.tech.map((t) => (
                       <span
                         key={t}
@@ -356,9 +335,30 @@ export default function App() {
                       </span>
                     ))}
                   </div>
+                  <div className="flex items-center gap-3">
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 border border-border text-sm rounded-full hover:bg-secondary transition-colors"
+                    >
+                      <Github size={13} />
+                      GitHub
+                    </a>
+                    {project.demo && (
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-foreground text-background text-sm rounded-full hover:opacity-80 transition-opacity"
+                      >
+                        Demo
+                      </a>
+                    )}
+                  </div>
                 </div>
                 {project.image && (
-                  <div className="w-full md:w-72 shrink-0 rounded-xl overflow-hidden border border-border self-start">
+                  <div className="w-full md:w-96 shrink-0 rounded-xl overflow-hidden border border-border">
                     <ImageWithFallback
                       src={project.image}
                       alt={project.title}
