@@ -2,9 +2,10 @@ import { useState } from "react";
 import { Github, Mail, MapPin, Calendar, Award, Briefcase, Menu, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 import profilePhoto from "@/imports/84DEA58E-DD5C-49FA-BA3A-5092FA009641_1_105_c.jpeg";
-import screenshot1 from "@/imports/screenshot_1.png";
 import screenshot2 from "@/imports/screenshot_2.png";
-import screenshot3 from "@/imports/screenshot_3.png";
+import lightbox1 from "@/imports/screenshot_1.png";
+import lightbox2 from "@/imports/screenshot_lightbox2.png";
+import lightbox3 from "@/imports/screenshot_3.png";
 
 const profile = {
   name: "菱山 大悟",
@@ -41,14 +42,15 @@ const experiences = [
   },
 ];
 
-const projects: { title: string; description: string; tech: string[]; github: string; demo: string | null; images: string[] }[] = [
+const projects: { title: string; description: string; tech: string[]; github: string; demo: string | null; thumbnail: string; images: string[] }[] = [
   {
     title: "ポートフォリオ最適化：古典 vs 量子",
     description: "幾何ブラウン運動で生成したダミー株価データを用い、古典ソルバー (scipy) と量子アニーリング (Fixstars Amplify) でポートフォリオ最適化を行い結果を比較。研究室での量子アニーリング研究を応用したデモアプリ。",
     tech: ["Python", "Amplify", "scipy", "Streamlit"],
     github: "https://github.com/Maple170/portfolio-optimization",
     demo: null,
-    images: [screenshot1, screenshot2, screenshot3],
+    thumbnail: screenshot2,
+    images: [lightbox1, lightbox2, lightbox3],
   },
 ];
 
@@ -366,7 +368,7 @@ export default function App() {
                     className="w-full md:w-96 shrink-0 rounded-xl overflow-hidden border border-border cursor-zoom-in group relative"
                   >
                     <ImageWithFallback
-                      src={project.images[0]}
+                      src={project.thumbnail}
                       alt={project.title}
                       className="w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                     />
