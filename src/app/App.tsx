@@ -316,28 +316,25 @@ export default function App() {
           >
             Projects
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-0 divide-y divide-border">
             {projects.map((project) => (
-              <div
-                key={project.title}
-                className="group p-6 bg-card border border-border rounded-2xl hover:border-foreground/20 hover:shadow-sm transition-all flex flex-col gap-4"
-              >
-                <div>
-                  <h3 className="text-base font-medium text-foreground mb-2">{project.title}</h3>
-                  <p className="text-[14px] leading-[1.75] text-foreground/75">{project.description}</p>
+              <div key={project.title} className="py-10 flex flex-col md:flex-row md:items-start gap-6">
+                <div className="flex-1">
+                  <h3 className="text-xl font-medium text-foreground mb-3">{project.title}</h3>
+                  <p className="text-[14px] leading-[1.85] text-foreground/75 max-w-[60ch] mb-4">{project.description}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tech.map((t) => (
+                      <span
+                        key={t}
+                        className="px-2.5 py-0.5 text-xs bg-secondary text-secondary-foreground rounded-md border border-border"
+                        style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map((t) => (
-                    <span
-                      key={t}
-                      className="px-2.5 py-0.5 text-xs bg-secondary text-secondary-foreground rounded-md border border-border"
-                      style={{ fontFamily: "'JetBrains Mono', monospace" }}
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-                <div className="flex items-center gap-3 mt-auto">
+                <div className="flex items-center gap-3 md:pt-1 shrink-0">
                   <a
                     href={project.github}
                     target="_blank"
