@@ -153,7 +153,7 @@ export default function App() {
 
               <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
                 <MapPin size={13} />
-                <span className="text-xs sm:text-sm">{profile.university} · {profile.location}</span>
+                <span className="text-xs sm:text-sm">九州大学 · 福岡県福岡市</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground mb-8 md:mb-10">
                 <Mail size={13} />
