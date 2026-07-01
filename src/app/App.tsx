@@ -38,7 +38,15 @@ const experiences = [
   },
 ];
 
-const projects: { title: string; description: string; tech: string[]; github: string; demo: string | null; image: string }[] = [];
+const projects: { title: string; description: string; tech: string[]; github: string; demo: string | null }[] = [
+  {
+    title: "ポートフォリオ最適化：古典 vs 量子",
+    description: "幾何ブラウン運動で生成したダミー株価データを用い、古典ソルバー (scipy) と量子アニーリング (Fixstars Amplify) でポートフォリオ最適化を行い結果を比較。研究室での量子アニーリング研究を応用したデモアプリ。",
+    tech: ["Python", "Amplify", "scipy", "Streamlit"],
+    github: "https://github.com/Maple170/portfolio-optimization",
+    demo: null,
+  },
+];
 
 const skills = ["Python", "PyTorch", "Git"];
 
@@ -308,8 +316,50 @@ export default function App() {
           >
             Projects
           </h2>
-          <div className="flex items-center justify-center h-40 border border-dashed border-border rounded-2xl text-muted-foreground text-sm" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
-            Coming soon
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {projects.map((project) => (
+              <div
+                key={project.title}
+                className="group p-6 bg-card border border-border rounded-2xl hover:border-foreground/20 hover:shadow-sm transition-all flex flex-col gap-4"
+              >
+                <div>
+                  <h3 className="text-base font-medium text-foreground mb-2">{project.title}</h3>
+                  <p className="text-[14px] leading-[1.75] text-foreground/75">{project.description}</p>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {project.tech.map((t) => (
+                    <span
+                      key={t}
+                      className="px-2.5 py-0.5 text-xs bg-secondary text-secondary-foreground rounded-md border border-border"
+                      style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex items-center gap-3 mt-auto">
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 border border-border text-sm rounded-full hover:bg-secondary transition-colors"
+                  >
+                    <Github size={13} />
+                    GitHub
+                  </a>
+                  {project.demo && (
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-foreground text-background text-sm rounded-full hover:opacity-80 transition-opacity"
+                    >
+                      Demo
+                    </a>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
